@@ -50,3 +50,10 @@
 #### Fourteenth Screenshot = Landscape
 <img width="650" height="300" src="https://github.com/Laurelborggreve/Madlibs/blob/master/doc/Madlibsland5.png">
 
+#### Fifteenth Screenshot = Landscape
+<img width="650" height="300" src="https://github.com/Laurelborggreve/Madlibs/blob/master/doc/Madlibsland7.png">
+
+#### Sixteenth Screenshot = Landscape
+<img width="650" height="300" src="https://github.com/Laurelborggreve/Madlibs/blob/master/doc/Madlibsland8.png">
+
+
