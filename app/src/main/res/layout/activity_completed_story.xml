@@ -17,25 +17,31 @@
         android:textSize="24sp" />
 
     <TextView
-        android:id="@+id/FinalStory"
+        android:id="@+id/final_story"
         android:layout_width="match_parent"
-        android:layout_height="228dp"
+        android:layout_height="247dp"
         android:layout_marginLeft="10sp"
         android:layout_marginRight="10sp"
+        android:layout_marginBottom="10dp"
         android:textColor="@android:color/black" />
 
     <ImageView
-        android:id="@+id/storyimage"
-        android:layout_width="match_parent"
-        android:layout_height="240dp"
-        android:onClick="OkClicked"
+        android:id="@+id/story_image"
+        android:layout_width="295dp"
+        android:layout_height="175dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="20dp"
         android:visibility="visible"
         tools:srcCompat="@tools:sample/avatars" />
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="match_parent"
+        android:layout_width="249dp"
         android:layout_height="72dp"
+        android:layout_gravity="center"
+        android:background="@android:color/background_light"
         android:onClick="MakeAnotherStoryClicked"
         android:text="Make another story"
         android:textColor="@android:color/holo_purple"

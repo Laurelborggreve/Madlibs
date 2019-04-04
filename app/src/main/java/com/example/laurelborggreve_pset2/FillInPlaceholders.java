@@ -1,6 +1,7 @@
 package com.example.laurelborggreve_pset2;
 
 import android.content.Intent;
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,14 +14,13 @@ import java.io.InputStream;
 
 public class FillInPlaceholders extends AppCompatActivity {
 
-    // declare fields
-    String Type_of_Word;
+    // Declare fields
+    String typeOfWord;
     Story story;
-    TextView wordsleft, typeofword, stimulation;
-    EditText wordfillin;
+    TextView wordsLeft, wordDescription, stimulation;
+    EditText wordFillIn;
 
-    // Method to create new story if bundle is empty
-    // Method to restore story if the bundle is not empty
+    // Method to create new story if bundle is empty or restore story if the bundle is not empty
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,11 +28,12 @@ public class FillInPlaceholders extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             Intent intent = getIntent();
-            story = (Story) intent.getSerializableExtra("retrievedstory");
+            story = (Story) intent.getSerializableExtra("retrievedStory");
             GetRightLayout();
         }
         else {
             story = (Story) savedInstanceState.getSerializable("story");
+            GetRightLayout();
         }
     }
 
@@ -43,58 +44,39 @@ public class FillInPlaceholders extends AppCompatActivity {
         outState.putSerializable("story", story);
     }
 
-
+    // Set layout for the 'Fill in Placeholders Activity'
     public void GetRightLayout() {
-        // Set LayOut for the 'Fill in Placeholders' Activity
         int Words_Left = story.getPlaceholderRemainingCount();
-        wordsleft = findViewById(R.id.Words_Left);
-        wordsleft.setText(Words_Left + " word(s) left");
+        wordsLeft = findViewById(R.id.words_left);
+        wordsLeft.setText(Words_Left + " word(s) left");
 
-        wordfillin = findViewById(R.id.Word_Fill_In);
+        wordFillIn = findViewById(R.id.word_fill_in);
 
-        Type_of_Word = story.getNextPlaceholder();
-        typeofword = findViewById(R.id.Word_Description);
-        typeofword.setText("please type a/an " + Type_of_Word);
-
+        typeOfWord = story.getNextPlaceholder();
+        wordDescription = findViewById(R.id.word_description);
+        wordDescription.setText("please type a/an " + typeOfWord);
     }
 
+    // Method to check if all words are filled in
+    // If not, ask for new input, otherwise go to next activity
     public void OkClicked(View view) {
-        story.fillInPlaceholder(wordfillin.getText().toString());
+        story.fillInPlaceholder(wordFillIn.getText().toString());
 
-        // Check if all words are filled in
-        // If not, ask for new input, otherwise go to next activity
         if (story.getPlaceholderRemainingCount() != 0) {
-            wordsleft.setText("");
-            wordfillin.setText("");
-            typeofword.setText("");
-            stimulation = findViewById(R.id.Stimulation);
+            wordsLeft.setText("");
+            wordFillIn.setText("");
+            wordDescription.setText("");
+
+            // EXTRA for improving project: set stimulation textview (Great, keep going)!
+            stimulation = findViewById(R.id.stimulation);
             stimulation.setVisibility(View.VISIBLE);
             GetRightLayout();
         }
         else {
-            // Set image for each story category
-            ImageView storyimage = findViewById(R.id.storyimage);
-            int id = view.getId();
-            switch(id) {
-                case R.id.tarzan:
-                    storyimage.setImageResource(getResources().getIdentifier("tarzan", "drawable", getPackageName()));
-                    break;
-                case R.id.university:
-                    storyimage.setImageResource(getResources().getIdentifier("university", "drawable", getPackageName()));
-                    break;
-                case R.id.clothes:
-                    storyimage.setImageResource(getResources().getIdentifier("tarzan", "drawable", getPackageName()));
-                    break;
-                case R.id.dance:
-                    storyimage.setImageResource(getResources().getIdentifier("dance", "drawable", getPackageName()));
-                    break;
-            }
-
             Intent intent = new Intent(this, CompletedStory.class);
-            intent.putExtra("complete_story", story);
+            intent.putExtra("completeStory", story);
             startActivity(intent);
             finish();
         }
     }
-
 }

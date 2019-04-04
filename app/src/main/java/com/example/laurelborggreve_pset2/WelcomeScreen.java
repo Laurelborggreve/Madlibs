@@ -14,38 +14,43 @@ public class WelcomeScreen extends AppCompatActivity {
 
     Story story;
 
-    private int [][] stories_total = {{R.id.simple, R.id.tarzan, R.id.university, R.id.clothes, R.id.dance}};
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_screen);
     }
 
+    // Obtain story that is clicked on
     public void StoryClicked(View view){
         Log.d("story", "GetStartedButton");
-        InputStream inputstream = getResources().openRawResource(R.raw.madlib0_simple);
+        InputStream inputStream = getResources().openRawResource(R.raw.madlib0_simple);
+        String storyId = "simple";
 
         int id = view.getId();
         switch(id) {
             case R.id.tarzan:
-                inputstream = getResources().openRawResource(R.raw.madlib1_tarzan);
+                inputStream = getResources().openRawResource(R.raw.madlib1_tarzan);
+                storyId = "tarzan";
                 break;
             case R.id.university:
-                inputstream = getResources().openRawResource(R.raw.madlib2_university);
+                inputStream = getResources().openRawResource(R.raw.madlib2_university);
+                storyId = "university";
                 break;
             case R.id.clothes:
-                inputstream = getResources().openRawResource(R.raw.madlib3_clothes);
+                inputStream = getResources().openRawResource(R.raw.madlib3_clothes);
+                storyId = "clothes";
                 break;
             case R.id.dance:
-                inputstream = getResources().openRawResource(R.raw.madlib4_dance);
+                inputStream = getResources().openRawResource(R.raw.madlib4_dance);
+                storyId = "dance";
                 break;
         }
 
-        story = new Story(inputstream);
+        // Set story and go to next activity
+        story = new Story(inputStream);
+        story.setStoryId(storyId);
         Intent intent = new Intent(WelcomeScreen.this, FillInPlaceholders.class);
-        intent.putExtra("retrievedstory", story);
+        intent.putExtra("retrievedStory", story);
         startActivity(intent);
     }
-
 }

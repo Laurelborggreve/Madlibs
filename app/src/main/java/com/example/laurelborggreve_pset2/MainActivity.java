@@ -18,8 +18,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void GetStartedClicked(View view) {
-            Intent intent = new Intent(MainActivity.this, WelcomeScreen.class);
-            startActivity(intent);
-        }
-
+        Intent intent = new Intent(MainActivity.this, WelcomeScreen.class);
+        startActivity(intent);
+    }
 }

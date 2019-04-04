@@ -27,7 +27,7 @@ public class Story implements Serializable {
     private List<String> placeholders;   // list of placeholders to fill in
     private int filledIn;                // number of placeholders that have been filled in
     private boolean htmlMode;            // set to true to surround placeholders with <b></b> tags
-    private int id_drawable;
+    private String storyId;
 
     {
         // instance initializer; runs before any constructor
@@ -36,6 +36,11 @@ public class Story implements Serializable {
         filledIn = 0;
         htmlMode = false;
         clear();
+    }
+
+    // EXTRA for improving the app: set image per story
+    public String getStoryId() {
+        return storyId;
     }
 
     /** constructs a new Story reading its text from the given input stream */
@@ -119,5 +124,9 @@ public class Story implements Serializable {
     /** returns story text */
     public String toString() {
         return text;
+    }
+
+    public void setStoryId(String storyId) {
+        this.storyId = storyId;
     }
 }

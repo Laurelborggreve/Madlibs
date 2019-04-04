@@ -5,6 +5,7 @@ import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,7 @@ import java.io.InputStream;
 
 public class CompletedStory extends AppCompatActivity {
 
-    Story complete_story;
+    Story completeStory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +26,32 @@ public class CompletedStory extends AppCompatActivity {
         setContentView(R.layout.activity_completed_story);
 
         Intent intent = getIntent();
-        complete_story = (Story) intent.getSerializableExtra("complete_story");
+        completeStory = (Story) intent.getSerializableExtra("completeStory");
+        String storyId = completeStory.getStoryId();
 
-        TextView finalstory = findViewById(R.id.FinalStory);
-        finalstory.setText(Html.fromHtml(complete_story.toString(), 0));
+        TextView finalStory = findViewById(R.id.final_story);
+        finalStory.setText(Html.fromHtml(completeStory.toString(), 0));
 
-        ImageView imageview = findViewById(R.id.storyimage);
-        imageview.setVisibility(View.VISIBLE);
-    }
+        // EXTRA vor improving the app: set an image for each story
+        ImageView storyImage = findViewById(R.id.story_image);
+        Log.d("storyId", storyId);
+
+        if (storyId.equals("simple")) {
+            storyImage.setImageResource(getResources().getIdentifier("madlibs", "drawable", getPackageName()));
+        }
+        else if (storyId.equals("tarzan")) {
+            storyImage.setImageResource(getResources().getIdentifier("tarzan", "drawable", getPackageName()));
+        }
+        else if (storyId.equals("university")) {
+            storyImage.setImageResource(getResources().getIdentifier("university", "drawable", getPackageName()));
+        }
+        else if (storyId.equals("clothes")) {
+            storyImage.setImageResource(getResources().getIdentifier("clothes", "drawable", getPackageName()));
+        }
+        else {
+            storyImage.setImageResource(getResources().getIdentifier("dance", "drawable", getPackageName()));
+            }
+        }
 
     // Go back to 'Welcome Screen'
     public void MakeAnotherStoryClicked(View view) {
@@ -40,3 +59,4 @@ public class CompletedStory extends AppCompatActivity {
         startActivity(intent);
     }
 }
+
